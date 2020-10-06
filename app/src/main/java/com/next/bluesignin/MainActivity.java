@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 						if (text1.equals(Cemail) && text2.equals(Cpassword)) {
 
 							//Toast.makeText(getApplication(), Cname+"님 환영합니다.", Toast.LENGTH_SHORT).show();
-							Intent intent = new Intent(MainActivity.this, MainPageActivity.class);
+							Intent intent = new Intent(MainActivity.this, MainActivity2.class);
 							intent.putExtra("email",Cemail);
 							intent.putExtra("password",Cpassword);
 							intent.putExtra("name",Cname);
