@@ -1,6 +1,9 @@
 package com.next.bluesignin;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +28,10 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
     private AppBarConfiguration mAppBarConfiguration;
 
     String email,name;
+    myDBHelper myDBHelper;
+    SQLiteDatabase sqlDB;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +42,12 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
         Intent intent = getIntent();
         email=intent.getStringExtra("email");
         name=intent.getStringExtra("name");
-        /*TextView getEmail=(TextView)findViewById(R.id.NavbarEmail);
-        TextView getName=(TextView)findViewById(R.id.NavbarName);
-        getEmail.setText(email);
-        getName.setText(name);*/
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {        //그 아래에 둥둥떠다니는 버튼
-                Snackbar.make(view, "이 버튼을 누르면 식물 등록하는 창으로 갈꺼임", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent=new Intent(MainActivity2.this,UploadActivity.class);
+                startActivity(intent);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -56,9 +59,6 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
         TextView getName=(TextView)nav_header_view.findViewById(R.id.NavbarName);
         getEmail.setText((email));
         getName.setText((name));
-        //여기까지는 네비게이션바에 이메일과 이름을 띄어주기 위한 코드
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setDrawerLayout(drawer)
@@ -66,6 +66,11 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        myDBHelper=new myDBHelper(this);
+        //////////////데이터베이스 추가/////////////////////////
+        sqlDB=myDBHelper.getWritableDatabase();   //디비 입력
+        sqlDB.execSQL("INSERT INTO plant VALUES('gaul','082002','083002')");
+        sqlDB.close();
     }
 
     @Override
@@ -86,4 +91,24 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         return false;
     }
+
+    static class myDBHelper extends SQLiteOpenHelper {
+
+        public myDBHelper(Context context){
+            super(context,"plant",null,1);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL("CREATE TABLE plant(PLANTNAME VARCHAR(128)PRIMARY KEY,TEMPARATURE VARCHAR(128) NOT NULL,HUMID VARCHAR(128) NOT NULL )");
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            db.execSQL("DROP TABLE IF EXISTS Plant");
+            onCreate(db);
+        }
+    }
+
+
 }

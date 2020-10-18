@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Fullscreen">
-
+        <activity android:name=".UploadActivity"></activity>
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity">
@@ -21,8 +21,7 @@
         </activity>
         <activity
             android:name=".MainActivity2"
-            android:theme="@style/AppTheme.Fullscreen.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.Fullscreen.NoActionBar" />
     </application>
 
 </manifest>

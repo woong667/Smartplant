@@ -61,6 +61,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 		@Override
 		public void onCreate(SQLiteDatabase db) {
 			db.execSQL("CREATE TABLE People(USERNAME VARCHAR(128)PRIMARY KEY,EMAIL VARCHAR(128) NOT NULL,PASSWORD VARCHAR(128) NOT NULL )");
+
 		}
 
 		@Override
