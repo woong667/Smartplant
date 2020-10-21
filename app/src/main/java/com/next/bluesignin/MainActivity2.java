@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -24,14 +27,27 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity2 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-    private AppBarConfiguration mAppBarConfiguration;
+public class MainActivity2 extends AppCompatActivity //implements NavigationView.OnNavigationItemSelectedListener
+{
 
-    String email,name;
+
+
+    String email,name; //이메일로 데이터베이스 저장했으니....
     myDBHelper myDBHelper;
-    SQLiteDatabase sqlDB;
+    SQLiteDatabase sqlDB,sqldata;
+    private RecyclerAdapter adapter;
+    UploadActivity.myDBHelper database;
+    String planturi;
+    String Cplanttype,Cplantname;
 
 
 
@@ -39,12 +55,20 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         Intent intent = getIntent();
         email=intent.getStringExtra("email");
         name=intent.getStringExtra("name");
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.aa);
+        database=new UploadActivity.myDBHelper(this);  //database로 이제 접근가능.
+        sqldata=database.getReadableDatabase();
+
+       if(database!=null) {
+           //recycleView//
+           init();
+           getData();
+           //reCycleView//
+       }
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {        //그 아래에 둥둥떠다니는 버튼
@@ -53,22 +77,7 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
                 startActivity(intent);
             }
         });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        //여기서부터
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        View nav_header_view=navigationView.getHeaderView(0);
-        TextView getEmail=(TextView)nav_header_view.findViewById(R.id.NavbarEmail);
-        TextView getName=(TextView)nav_header_view.findViewById(R.id.NavbarName);
-        getEmail.setText((email));
-        getName.setText((name));
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+
         myDBHelper=new myDBHelper(this);
         //////////////데이터베이스 추가/////////////////////////
         sqlDB=myDBHelper.getWritableDatabase();   //테이블을 생성. 아직 데이터는 없음.
@@ -297,25 +306,61 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
             sqlDB.close();
         }
         //여기까지 데이터 입력
+
+
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_activity2, menu);
-        return true;
+    private void init() {
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        adapter = new RecyclerAdapter();
+        recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
+    private void getData() {
+        //리사이클뷰에 올릴 데이터 얻는곳.
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        return false;
+
+        List<String> listTitle=new ArrayList<>();
+        List<String> listContent=new ArrayList<>();
+        List<String> listResId= new ArrayList<>();
+
+        //셋 다 String
+
+
+        Cursor cursor = sqldata.rawQuery("SELECT planttype,plantphoto,plantname FROM user_plant where user=?;",new String[]{email});
+        int count=cursor.getCount();
+
+        for(int i=0;i<count;i++){
+
+            cursor.moveToNext();
+            Cplanttype=cursor.getString(0);
+            planturi=cursor.getString(1);
+            Cplantname=cursor.getString(2);
+            listTitle.add(Cplanttype);
+            listResId.add(planturi);
+            listContent.add(Cplantname);
+        }
+
+
+           for (int i = 0; i < listTitle.size(); i++) {
+               // 각 List의 값들을 data 객체에 set 해줍니다.
+               RecyclerAdapter.Data data = new RecyclerAdapter.Data();
+               data.setTitle(listTitle.get(i));
+               data.setContent(listContent.get(i));
+                data.setResId(listResId.get(i));
+
+               // 각 값이 들어간 data를 adapter에 추가합니다.
+               adapter.addItem(data);
+           }
+
+
+        // adapter의 값이 변경되었다는 것을 알려줍니다.
+        adapter.notifyDataSetChanged();
     }
 
     static class myDBHelper extends SQLiteOpenHelper {
@@ -335,6 +380,7 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
             onCreate(db);
         }
     }
+
 
 
 }
