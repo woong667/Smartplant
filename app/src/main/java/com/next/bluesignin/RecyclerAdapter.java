@@ -72,7 +72,7 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ItemV
 
 
 
-           // setImage(uri);
+            // setImage(uri);
             //imageView.setImageResource(data.getResId());
         }
 
@@ -96,11 +96,8 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ItemV
             e.printStackTrace();
         }
     }
-
     private ContentResolver getContentResolver() {
         return null;
-
-
     ///바뀐곳*/
 
     public static class Data {

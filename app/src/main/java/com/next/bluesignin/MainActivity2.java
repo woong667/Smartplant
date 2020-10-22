@@ -41,7 +41,7 @@ public class MainActivity2 extends AppCompatActivity //implements NavigationView
 
 
 
-    String email,name; //이메일로 데이터베이스 저장했으니....
+    String email; //이메일로 데이터베이스 저장했으니....
     myDBHelper myDBHelper;
     SQLiteDatabase sqlDB,sqldata;
     private RecyclerAdapter adapter;
@@ -57,17 +57,16 @@ public class MainActivity2 extends AppCompatActivity //implements NavigationView
         setContentView(R.layout.activity_main2);
         Intent intent = getIntent();
         email=intent.getStringExtra("email");
-        name=intent.getStringExtra("name");
         FloatingActionButton fab = findViewById(R.id.aa);
         database=new UploadActivity.myDBHelper(this);  //database로 이제 접근가능.
         sqldata=database.getReadableDatabase();
 
-       if(database!=null) {
-           //recycleView//
-           init();
-           getData();
-           //reCycleView//
-       }
+        if(database!=null) {
+            //recycleView//
+            init();
+            getData();
+            //reCycleView//
+        }
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +85,7 @@ public class MainActivity2 extends AppCompatActivity //implements NavigationView
         //여기서부터
         if(count==0) //아직 아무 데이터도 없으면
         {
-             //여기서부터 이제 식물들 insert.....정녕 노가다말고 답이 없는것인가..
+            //여기서부터 이제 식물들 insert.....정녕 노가다말고 답이 없는것인가..
             sqlDB.execSQL("INSERT INTO plant VALUES('가울테리아','082002','053003')");
             sqlDB.execSQL("INSERT INTO plant VALUES('개운죽','082002','053001')");
             sqlDB.execSQL("INSERT INTO plant VALUES('윌마','082002','053003')");
@@ -347,16 +346,16 @@ public class MainActivity2 extends AppCompatActivity //implements NavigationView
         }
 
 
-           for (int i = 0; i < listTitle.size(); i++) {
-               // 각 List의 값들을 data 객체에 set 해줍니다.
-               RecyclerAdapter.Data data = new RecyclerAdapter.Data();
-               data.setTitle(listTitle.get(i));
-               data.setContent(listContent.get(i));
-                data.setResId(listResId.get(i));
+        for (int i = 0; i < listTitle.size(); i++) {
+            // 각 List의 값들을 data 객체에 set 해줍니다.
+            RecyclerAdapter.Data data = new RecyclerAdapter.Data();
+            data.setTitle(listTitle.get(i));
+            data.setContent(listContent.get(i));
+            data.setResId(listResId.get(i));
 
-               // 각 값이 들어간 data를 adapter에 추가합니다.
-               adapter.addItem(data);
-           }
+            // 각 값이 들어간 data를 adapter에 추가합니다.
+            adapter.addItem(data);
+        }
 
 
         // adapter의 값이 변경되었다는 것을 알려줍니다.

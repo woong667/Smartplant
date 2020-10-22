@@ -18,6 +18,5 @@ public class MainPageActivity extends AppCompatActivity {
         String name=intent.getStringExtra("name");
 
 
-
     }
 }

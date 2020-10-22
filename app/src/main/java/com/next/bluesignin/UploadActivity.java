@@ -42,7 +42,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
     private static final String[] COUNTRIES = new String[] {
             "가울테리아", "개운죽", "윌마", "공작야자", "관엽베고니아",
             "관음죽", "구문초", "구즈마니아", "군자란", "글레코마",
-           "금목서","금사철나무","금식나무","금전수","금천죽",
+            "금목서","금사철나무","금식나무","금전수","금천죽",
             "기누라","꽃베고니아","나도풍란","나한송","남천",
             "네마탄투스","네오레겔리아","녹영","뉴기니아봉선화","대만고무나무",
             "더피고사리","덕구리난","데코라고무나무","덴파레","도깨비고비",
@@ -112,7 +112,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.search_plant);
         textView.setAdapter(adapter);
 
-       btn.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -146,7 +146,9 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
                 sqlDB.close();
                 sqlDB2.close();
                 Intent intent = new Intent(UploadActivity.this, MainActivity2.class);
+                intent.putExtra("email",email);
                 startActivity(intent);
+                finish();
 
             }
         });
