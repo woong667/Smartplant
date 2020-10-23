@@ -34,8 +34,8 @@
             android:textColor="@android:color/darker_gray"/>
     </LinearLayout>
 
-    <!-- <ImageView
-         android:id="@+id/imageView"
+    <ImageView
+         android:id="@+id/imageView12"
          android:layout_width="50dp"
-         android:layout_height="50dp" />-->
+         android:layout_height="50dp" />
 </LinearLayout>

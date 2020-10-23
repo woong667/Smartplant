@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,19 +27,36 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ItemV
 
 
     private ImageView imageView;
+    private static OnItemClickListener mListener;
     private ArrayList<Data> listData = new ArrayList<>();
     @NonNull
     @Override
     public RecyclerAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
-        return new ItemViewHolder(view);
+       // View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
+        //return new ItemViewHolder(view);
+        Context context = parent.getContext() ;
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
+
+        View view = inflater.inflate(R.layout.item, parent, false) ;
+        RecyclerAdapter.ItemViewHolder vh = new RecyclerAdapter.ItemViewHolder(view) ;
+
+        return vh ;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.ItemViewHolder holder, int position) {
 
         holder.onBind(listData.get(position));
+    }
+
+    public interface OnItemClickListener
+    {
+        void onItemClick(View v, int pos);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener)
+    {
+        this.mListener = listener;
     }
 
     @Override
@@ -50,55 +68,54 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ItemV
         listData.add(data);
     }
 
-    class ItemViewHolder extends RecyclerView.ViewHolder {
+   /// 새로 추가
+
+
+
+    /////  새로 추가
+
+
+
+    public class ItemViewHolder extends RecyclerView.ViewHolder{
 
         private TextView textView1;
         private TextView textView2;
         Uri uri;
 
 
-        ItemViewHolder(View itemView) {
+       public ItemViewHolder(final View itemView) {
             super(itemView);
 
-            textView1 = itemView.findViewById(R.id.textView1);
-            textView2 = itemView.findViewById(R.id.textView2);
-            imageView = itemView.findViewById(R.id.imageView);
+            itemView.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View view) {
+                    int pos=getAdapterPosition();
+                    if(pos!=RecyclerView.NO_POSITION){
+                        System.out.println(pos);
+                        System.out.println(mListener);
+                        if(mListener!=null)
+                        {
+                            mListener.onItemClick(view,pos);
+                        }
+                    }
+                }
+            });
+
+           textView1 = itemView.findViewById(R.id.textView1);
+           textView2 = itemView.findViewById(R.id.textView2);
+           imageView = itemView.findViewById(R.id.imageView12);
         }
+
 
         void onBind(Data data) {
             textView1.setText(data.getTitle());
             textView2.setText(data.getContent());
             uri= Uri.parse(data.getResId());
-
-
-
-            // setImage(uri);
-            //imageView.setImageResource(data.getResId());
-        }
-
-
-
-
-    }
-
-
-
-
-
-
-  /*///바뀐곳
-   private void setImage(Uri uri) {
-        try{
-            InputStream in = getContentResolver().openInputStream(uri);
-            Bitmap bitmap = BitmapFactory.decodeStream(in);
-            imageView.setImageBitmap(bitmap);
-        } catch (FileNotFoundException e){
-            e.printStackTrace();
+            imageView.setImageResource(R.drawable.unnamed);
         }
     }
-    private ContentResolver getContentResolver() {
-        return null;
-    ///바뀐곳*/
+
 
     public static class Data {
 
@@ -107,6 +124,7 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ItemV
         private String resId;
 
         public String getTitle() {
+
             return title;
         }
 

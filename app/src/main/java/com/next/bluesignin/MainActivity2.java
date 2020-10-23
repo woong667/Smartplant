@@ -39,8 +39,6 @@ import java.util.List;
 public class MainActivity2 extends AppCompatActivity //implements NavigationView.OnNavigationItemSelectedListener
 {
 
-
-
     String email; //이메일로 데이터베이스 저장했으니....
     myDBHelper myDBHelper;
     SQLiteDatabase sqlDB,sqldata;
@@ -51,15 +49,32 @@ public class MainActivity2 extends AppCompatActivity //implements NavigationView
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        RecyclerAdapter recyclerAdapter=new RecyclerAdapter();
+        recyclerAdapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+                Intent nex=new Intent(MainActivity2.this,DetailPageActivity.class);
+                nex.putExtra("email",email);
+                nex.putExtra("seq",pos);
+                startActivity(nex);
+
+            }
+        });
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setAdapter(recyclerAdapter);
+
         Intent intent = getIntent();
         email=intent.getStringExtra("email");
         FloatingActionButton fab = findViewById(R.id.aa);
         database=new UploadActivity.myDBHelper(this);  //database로 이제 접근가능.
         sqldata=database.getReadableDatabase();
+
+        //새로
 
         if(database!=null) {
             //recycleView//
@@ -307,8 +322,8 @@ public class MainActivity2 extends AppCompatActivity //implements NavigationView
         //여기까지 데이터 입력
 
 
-
     }
+
 
     private void init() {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -361,6 +376,8 @@ public class MainActivity2 extends AppCompatActivity //implements NavigationView
         // adapter의 값이 변경되었다는 것을 알려줍니다.
         adapter.notifyDataSetChanged();
     }
+
+
 
     static class myDBHelper extends SQLiteOpenHelper {
 
