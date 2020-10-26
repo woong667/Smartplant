@@ -60,6 +60,7 @@ public class MainActivity2 extends AppCompatActivity //implements NavigationView
             public void onItemClick(View v, int pos) {
                 Intent nex=new Intent(MainActivity2.this,DetailPageActivity.class);
                 nex.putExtra("email",email);
+               // nex.putExtra("seq",pos);
                 nex.putExtra("seq",pos);
                 startActivity(nex);
 
