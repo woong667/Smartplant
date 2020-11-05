@@ -18,6 +18,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +41,9 @@ public class DetailPageActivity extends AppCompatActivity {
     SQLiteDatabase sqlDB;
     private ImageView img1;
     TextView t1,t2,t3,t4;
+    Button btn;
+    Bitmap bitm;
+    String email;
     Uri uri;
     String Cplantphoto,Cplantname,Cdes,Ctemparature,Chumid;
     @Override
@@ -49,7 +53,7 @@ public class DetailPageActivity extends AppCompatActivity {
         database=new UploadActivity.myDBHelper(this);
         sqlDB=database.getReadableDatabase();
         Intent intent=getIntent();
-        String email=intent.getStringExtra("email");
+        email=intent.getStringExtra("email");
         int seq=intent.getIntExtra("seq",0);
         Cursor cursor = sqlDB.rawQuery("SELECT plantphoto,plantname,des,temparature,humid FROM user_plant where user=?;",new String[]{email});
         cursor.moveToPosition(seq);
@@ -64,13 +68,32 @@ public class DetailPageActivity extends AppCompatActivity {
         t3=(TextView)findViewById(R.id.DetailTmp);
         t4=(TextView)findViewById(R.id.DetailHum);
         img1=(ImageView)findViewById(R.id.DetailImage);
-        Toast.makeText(getApplicationContext(),uri+"",Toast.LENGTH_SHORT).show();
+        btn=(Button)findViewById(R.id.checkplant);
+
+        btn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(DetailPageActivity.this,CheckActivity.class);
+                intent.putExtra("email",email);
+                intent.putExtra("tmp",t3.getText().toString());
+                intent.putExtra("hum",t4.getText().toString());
+                startActivity(intent);
+
+            }
+        });
+
        // File file = new File(uri.getPath());
         //Uri contentUri = getImageContentUri(this, file.getAbsolutePath());
         t1.setText(Cplantname);
         t2.setText(Cdes);
         t3.setText(Ctemparature);
         t4.setText(Chumid);
+        /*String fileName=Cplantphoto;
+        File file=new File(fileName);
+        bitm=BitmapFactory.decodeFile(file.getAbsolutePath());
+        Toast.makeText(getApplicationContext(),bitm+"",Toast.LENGTH_SHORT).show();
+        img1.setImageBitmap(bitm);*/
         img1.setImageResource(R.drawable.d);
     }
 
@@ -81,20 +104,5 @@ public class DetailPageActivity extends AppCompatActivity {
             img1.setImageBitmap(bitmap);
 
     }
-
-
-  /* public static Uri getImageContentUri(Context context, String absPath) {
-        Cursor cursor = context.getContentResolver().query( MediaStore.Images.Media.EXTERNAL_CONTENT_URI , new String[] { MediaStore.Images.Media._ID } , MediaStore.Images.Media.DATA + "=? " , new String[] { absPath }, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            int id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
-            return Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI , Integer.toString(id));
-        } else if (!absPath.isEmpty()) {
-            ContentValues values = new ContentValues(); values.put(MediaStore.Images.Media.DATA, absPath);
-            return context.getContentResolver().insert( MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values); }
-        else { return null; }
-    }*/
-
-
-
 
 }

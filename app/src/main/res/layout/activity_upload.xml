@@ -8,6 +8,24 @@
     android:orientation="vertical"
     android:background="@drawable/gradient_background_light_green"
     tools:context=".UploadActivity">
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:background="@color/metroGreen"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-354dp">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/icon"
+            tools:layout_editor_absoluteX="155dp"
+            tools:layout_editor_absoluteY="-7dp" />
+
+    </LinearLayout>
 
 
 
@@ -16,7 +34,7 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/upload"
         android:background="@drawable/background_rounding"
         />
@@ -31,6 +49,7 @@
         android:completionThreshold="1"
         android:gravity="center"
         android:hint="식물의 종류를 입력하세요"
+        android:textColor="@color/black"
         android:paddingLeft="35dp"
         android:paddingTop="30dp"
         android:textColorHint="#DDD1D8"
@@ -55,7 +74,11 @@
         android:hint="화분에 대한 설명을 입력하세요"
         android:paddingTop="30dp"
         android:theme="@style/TextInputLayoutTheme" />
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/metroGreen"
+        android:orientation="horizontal">
     <Button
         android:id="@+id/btn_upload"
         android:layout_width="346dp"
@@ -67,9 +90,10 @@
         android:background="@drawable/rounded_button_background"
         android:text="등록"
         android:textAllCaps="false"
-        android:textColor="@color/materialLightBlue700"
+        android:textColor="@color/materialLightGreen700"
 
         />
+    </LinearLayout>
 
 </LinearLayout>
 

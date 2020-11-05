@@ -142,7 +142,8 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
                     humid="화분 흙 대부분이 말랐을때 충분히 관수해야함";
 
                 sqlDB2=myDBHelper.getWritableDatabase();
-                sqlDB2.execSQL("INSERT INTO USER_PLANT VALUES('"+email+"','"+planttype.getText().toString()+"','"+uri.toString()+"','"+plantname.getText().toString()+"','"+des.getText().toString()+"','"+temparature+"','"+humid+"')");
+                String filepath=getRealPathFromURI(uri);
+                sqlDB2.execSQL("INSERT INTO USER_PLANT VALUES('"+email+"','"+planttype.getText().toString()+"','"+filepath+"','"+plantname.getText().toString()+"','"+des.getText().toString()+"','"+temparature+"','"+humid+"')");
                 sqlDB.close();
                 sqlDB2.close();
                 Intent intent = new Intent(UploadActivity.this, MainActivity2.class);
@@ -157,6 +158,45 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
 
 
     }
+
+    private String getRealPathFromURI(Uri contentURI) {
+
+
+
+        String result;
+
+        Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
+
+
+
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+
+            result = contentURI.getPath();
+
+
+
+        } else {
+
+            cursor.moveToFirst();
+
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+
+            result = cursor.getString(idx);
+
+            cursor.close();
+
+        }
+
+
+
+        return result;
+
+    }
+
+
+
+
+
 
     public void onClickButton1(View view){
         Intent intent = new Intent(Intent.ACTION_PICK);
