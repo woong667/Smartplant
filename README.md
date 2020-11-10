@@ -31,6 +31,7 @@
  
  #### 최종결과
  
+ -아래 측정하기 버튼에 대한 이벤트
  ![5](https://user-images.githubusercontent.com/66250847/98647927-edf16500-2378-11eb-8e42-c5be030a8d10.png)
  
   
