@@ -6,7 +6,7 @@
   생각한 내용을 개발에 옮긴 프로젝트입니다.
   
 #### 프로젝트 개요
-  ![1](https://user-images.githubusercontent.com/66250847/98647797-bb476c80-2378-11eb-95cc-f92a7e1e7c19.png)
+  ![1](https://user-images.githubusercontent.com/66250847/98647847-d31ef080-2378-11eb-8d66-1be1e8c159ab.png)
   
   
   
