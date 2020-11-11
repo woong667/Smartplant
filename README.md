@@ -1,49 +1,42 @@
-# BlueSignIn
-Sign In and Sign Up Ui Design
 
+# Plant Helpi
 
-<img src="images/Blue Sign In.jpg" width="540" height="650" alt="Blue Sign In"/>
+#### 프로젝트 설명
+- 키우던 5개의 화분을 관리를 제대로 하지 못해 모두 시들어버렸고 식물의 토양상태, 현재 주변환경이 식물에게 적합한가를 알 수 있는 방법이 있으면 좋겠다는 생각을 하였고 
+  생각한 내용을 개발에 옮긴 프로젝트입니다.
+  
+#### 프로젝트 개요
+  ![1](https://user-images.githubusercontent.com/66250847/98648197-4aed1b00-2379-11eb-99a4-dbb905e68f2e.png)
+  
+#### 동작방식
 
-## Checkout My Libraries
+- wemos 보드와 필요한 센서(온습도센서,토양습도)를 통해 원하는 값을 측정한다.
+- MQTT 프로토콜을 이용하여 NODE서버와 통신한다(WiFi 이용)-> 측정한 데이터를 node서버로 전송.
+- Cloud mongoDB에 해당데이터를 저장한다.
+- volley 라이브러리를 통해 안드로이드 애플리케이션-> node서버로 필요한 데이터 request하고 mongoDB에 저장된 최근날짜순 10개 데이터를 response한다.
+- Spinner를 통해 2가지 센서에 대한 정보를 각각 보여주고 저장된 식물 데이터베이스에 기초하여 사용자에게 알림서비스를 준다.
 
-* **[Android-Intent-Library](https://github.com/mohammadima3oud/Android-Intent-Library):** A library which will save you a lot of time from writing the same intent creation code. it consist of many intent creation codes like Share, Contacts, Email and etc, which you can easily use.
-* **[Material-Resources-Library](https://github.com/mohammadima3oud/Material-Resources-Library):** A list of most useful resources for designing android apps such as all material colors and dimens, 180 Gradient background + html, social, flat, fluent, metro colors.
-* **[Complete-Google-Map-API-Tutorial](https://github.com/mohammadima3oud/Complete-Google-Map-API-Tutorial):** Learn How to use Google Map API for Android from Basic to Advance with complete examples.
-* **[DropSignIn](https://github.com/mohammadima3oud/DropSignIn):** Sign In UI Design
-* **[BlueSignIn](https://github.com/mohammadima3oud/BlueSignIn):** Sign In and Sign Up Ui Design
+--------------------------------------------------------------------------------------------------------------------------------------------
 
-## Donations
-This project needs you! If you would like to support this project's further development, the creator of this project or the continuous maintenance of this project, feel free to donate. Your donation is highly appreciated. Thank you!
+#### 애플리케이션 구현 모습
 
+ ![2](https://user-images.githubusercontent.com/66250847/98647847-d31ef080-2378-11eb-8d66-1be1e8c159ab.png)
+ ![3](https://user-images.githubusercontent.com/66250847/98647867-dd40ef00-2378-11eb-82aa-bdf99ab1ceb2.png)
+ 
+ -------------------------------------------------------------------------------------------------------------------------------------------
+ #### 상황별 토양습도 체크
+ ![4](https://user-images.githubusercontent.com/66250847/98647891-e5992a00-2378-11eb-9848-c08bd4d33103.png)
+ 
+ -------------------------------------------------------------------------------------------------------------------------------------------
+ 
+ #### 최종결과
+ 
+ - 아래 측정하기 버튼에 대한 이벤트
+ ![5](https://user-images.githubusercontent.com/66250847/98647927-edf16500-2378-11eb-8e42-c5be030a8d10.png)
+ 
+  
+  
 
-* **[Donate $5](https://www.paypal.me/mohammadima3oud/5)**: Thank's for creating this project, here's a tea (or some juice) for you!
-* **[Donate $10](https://www.paypal.me/mohammadima3oud/10)**: Wow, I am stunned. Let me take you to the movies!
-* **[Donate $15](https://www.paypal.me/mohammadima3oud/15)**: I really appreciate your work, let's grab some lunch!
-* **[Donate $25](https://www.paypal.me/mohammadima3oud/25)**: That's some awesome stuff you did right there, dinner is on me!
-* **[Donate $50](https://www.paypal.me/mohammadima3oud/50)**: I really really want to support this project, great job!
-* **[Donate $100](https://www.paypal.me/mohammadima3oud/100)**: You are the man! This project saved me hours (if not days) of struggle and hard work, simply awesome!
-* **[Donate $2799](https://www.paypal.me/mohammadima3oud/2799)**: Go buddy, buy Macbook Pro for yourself!
-
-Of course, you can also choose what you want to donate, all donations are awesome!
-
-
-## Changelog
-* **1.0.0**
-    * Initial release
-
-
-## License
-
-    Copyright 2019 mohammadima3oud
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+  
+  
+  
