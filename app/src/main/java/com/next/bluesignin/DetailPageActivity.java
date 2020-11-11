@@ -89,7 +89,7 @@ public class DetailPageActivity extends AppCompatActivity {
         t2.setText(Cdes);
         t3.setText(Ctemparature);
         t4.setText(Chumid);
-        /*String fileName=Cplantphoto;
+       /* String fileName=Cplantphoto;
         File file=new File(fileName);
         bitm=BitmapFactory.decodeFile(file.getAbsolutePath());
         Toast.makeText(getApplicationContext(),bitm+"",Toast.LENGTH_SHORT).show();

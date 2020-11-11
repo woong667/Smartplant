@@ -29,6 +29,7 @@
 
 
 
+
     <ImageButton
         android:id="@+id/imagebtn"
         android:layout_width="300dp"
@@ -42,16 +43,16 @@
     <AutoCompleteTextView
         android:id="@+id/search_plant"
         android:layout_width="348dp"
-        android:layout_height="79dp"
+        android:layout_height="104dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
         android:completionHint="이 중에서 골라주세요"
         android:completionThreshold="1"
         android:gravity="center"
         android:hint="식물의 종류를 입력하세요"
-        android:textColor="@color/black"
         android:paddingLeft="35dp"
         android:paddingTop="30dp"
+        android:textColor="@color/black"
         android:textColorHint="#DDD1D8"
 
 
@@ -60,7 +61,7 @@
     <EditText
         android:id="@+id/plant_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="105dp"
         android:layout_marginLeft="120dp"
         android:hint="화분의 이름을 입력하세요"
         android:paddingTop="30dp"
@@ -69,30 +70,32 @@
     <EditText
         android:id="@+id/des"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="99dp"
         android:layout_marginLeft="110dp"
         android:hint="화분에 대한 설명을 입력하세요"
         android:paddingTop="30dp"
         android:theme="@style/TextInputLayoutTheme" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="130dp"
         android:background="@color/metroGreen"
         android:orientation="horizontal">
-    <Button
-        android:id="@+id/btn_upload"
-        android:layout_width="346dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="110dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/rounded_button_background"
-        android:text="등록"
-        android:textAllCaps="false"
-        android:textColor="@color/materialLightGreen700"
 
-        />
+        <Button
+            android:id="@+id/btn_upload"
+            android:layout_width="346dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/rounded_button_background"
+            android:text="등록"
+            android:textAllCaps="false"
+            android:textColor="@color/materialLightGreen700"
+
+            />
     </LinearLayout>
 
 </LinearLayout>

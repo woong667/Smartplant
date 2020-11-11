@@ -29,7 +29,7 @@
     <LinearLayout
 
         android:layout_width="match_parent"
-        android:layout_height="540dp"
+        android:layout_height="650dp"
         android:orientation="vertical"
         android:background="@color/white">
 
@@ -105,7 +105,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="181dp"
             android:background="@drawable/textviewsolid"
             android:orientation="horizontal">
 
@@ -114,17 +114,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="28dp"
-                android:textStyle="bold"
                 android:text="Description: "
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/DetailDes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="28dp"
-                android:layout_marginLeft="8dp" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
