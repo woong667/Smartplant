@@ -71,7 +71,7 @@ public class MainActivity2 extends AppCompatActivity //implements NavigationView
 
         Intent intent = getIntent();
         email=intent.getStringExtra("email");
-        FloatingActionButton fab = findViewById(R.id.aa);
+        Button fab = (Button)findViewById(R.id.aa);
         database=new UploadActivity.myDBHelper(this);  //database로 이제 접근가능.
         sqldata=database.getReadableDatabase();
 

@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -159,37 +160,40 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    private String getRealPathFromURI(Uri contentURI) {
-
-
-
-        String result;
-
+    private String getRealPathFromURI(Uri contentUri) {
+        /*String result;
         Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
-
-
-
         if (cursor == null) { // Source is Dropbox or other similar local file path
-
             result = contentURI.getPath();
-
-
-
         } else {
-
             cursor.moveToFirst();
-
             int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-
             result = cursor.getString(idx);
-
             cursor.close();
-
         }
+        return result;*/
+        /////위에꺼는 첫번쨰 방법.
+        
+        //아래것은 두번째방법
+        if (contentUri.getPath().startsWith("/storage")) {
+            return contentUri.getPath();
+        }
+        String id = DocumentsContract.getDocumentId(contentUri).split(":")[1];
+        String[] columns = { MediaStore.Files.FileColumns.DATA };
+        String selection = MediaStore.Files.FileColumns._ID + " = " + id;
+        Cursor cursor = getContentResolver().query(MediaStore.Files.getContentUri("external"), columns, selection, null, null);
+        try {
+            int columnIndex = cursor.getColumnIndex(columns[0]);
+            if (cursor.moveToFirst()) {
+                return cursor.getString(columnIndex);
+            }
+        }
+        finally {
+            cursor.close();
+        }
+        return null;
 
 
-
-        return result;
 
     }
 
