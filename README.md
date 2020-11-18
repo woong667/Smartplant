@@ -8,7 +8,7 @@
   생각한 내용을 개발에 옮긴 프로젝트입니다.
   
 #### 프로젝트 개요
-  ![1](https://user-images.githubusercontent.com/66250847/98648197-4aed1b00-2379-11eb-99a4-dbb905e68f2e.png)
+  ![1](https://user-images.githubusercontent.com/66250847/99511665-e90d6080-29cb-11eb-9140-26386d020bb6.png)
   
 #### 동작방식
 
@@ -22,8 +22,8 @@
 
 #### 애플리케이션 구현 모습
 
- ![2](https://user-images.githubusercontent.com/66250847/98647847-d31ef080-2378-11eb-8d66-1be1e8c159ab.png)
- ![3](https://user-images.githubusercontent.com/66250847/98647867-dd40ef00-2378-11eb-82aa-bdf99ab1ceb2.png)
+ ![2](https://user-images.githubusercontent.com/66250847/99511675-eb6fba80-29cb-11eb-8b41-b27e10fd8862.png)
+ ![3](https://user-images.githubusercontent.com/66250847/99511680-ed397e00-29cb-11eb-8d39-2a8ef1a6deb3.png)
  
  -------------------------------------------------------------------------------------------------------------------------------------------
  #### 상황별 토양습도 체크
@@ -34,7 +34,13 @@
  #### 최종결과
  
  - 아래 측정하기 버튼에 대한 이벤트
- ![5](https://user-images.githubusercontent.com/66250847/98647927-edf16500-2378-11eb-8e42-c5be030a8d10.png)
+ ![5](https://user-images.githubusercontent.com/66250847/99511684-ef034180-29cb-11eb-89bd-caa58baf061f.png)
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------
+ 
+ #### 스마트폰 동작모습
+ - 측정하기 버튼에 대한 이벤트
+  ![6](https://user-images.githubusercontent.com/66250847/99511688-f0346e80-29cb-11eb-8c00-6e52ef266c85.png)
  
   
   
