@@ -1,6 +1,6 @@
 
 # Plant Helpi
-
+--------------------------------------------------------------------------------------------------------------------------------------------------
 #### 프로젝트 설명
 <img width="500px" height="500px" src="https://user-images.githubusercontent.com/66250847/99510681-b2831600-29ca-11eb-83d1-447fe5e20b19.jpg"/>
 <img width="500px" height="500px" src="https://user-images.githubusercontent.com/66250847/99510963-04c43700-29cb-11eb-8824-8b2783ea7103.jpg"/>
